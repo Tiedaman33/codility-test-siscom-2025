@@ -63,4 +63,18 @@ def findSubstring(s, words):
         :type words: List[str]
         :rtype: List[int]
         """
-        
+        #create a dictionary to map key value pairs of words to their lengths
+        word_lengths = {word: len(word) for word in words}
+        #create a list to store the starting points of the concatenated substrings
+        result = []
+        #iterate though the string and check for concatnated substrings
+        for i in range(len(s) - sum(word_lengths.values())):
+                #check if the subtring starting at index i is a concatenation of the words
+                if s[i:i + sum(word_lengths.values())] == "".join(words):
+                        result.append(i)
+        return result
+
+#test case
+print(findSubstring("barfoothefoobarman", ["foo","bar"]))
+print(findSubstring("wordgoodgoodgoodbestword", ["word","good","best","word"]))
+print(findSubstring("barfoofoobarthefoobarman", ["bar","foo","the"]))

@@ -55,4 +55,30 @@ def romanToInt(s):
         :type s: str
         :rtype: int
         """
-        
+        #create a dictionary to map key value pairs of roman numerals to integers
+        roman_dict = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+        }
+        #initialize the total to zero
+        total_int = 0
+        #iterate through the string and add the value of each roman numeral to the total
+        for i in range(len(s)):
+            # as long as i is greater than 0, check whether the current number is greater than the previous number then subtract twice the value of the previous number
+            if i > 0 and roman_dict[s[i]] > roman_dict[s[i - 1]]:
+                total_int += roman_dict[s[i]] - 2 * roman_dict[s[i - 1]]
+            else:
+                #if the current number is not greater than the previous, add the value to total
+                total_int += roman_dict[s[i]]
+                #then return an integer value of the total_int 
+        return total_int
+
+#test case
+print(romanToInt("IV"))    # Output: 3
+print(romanToInt("IVIIICVIIIIICIIIIII")) # Output: 219
+print(romanToInt("LVIIIVIIIVIIIVIII"))  # Output: 76
